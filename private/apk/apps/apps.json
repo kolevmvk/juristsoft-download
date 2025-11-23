@@ -1,0 +1,17 @@
+{
+  "apps": [
+    {
+      "id": "worker_app",
+      "name": "JuristSoft Worker App",
+      "description": "Aplikacija za radnike.",
+      "versions": [
+        {
+          "version": "1.0.0-test",
+          "file": "1.0.0-test.apk",
+          "date": "2025-11-23"
+        }
+      ]
+    }
+  ]
+}
+
