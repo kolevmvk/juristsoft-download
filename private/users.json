@@ -7,6 +7,10 @@
     {
       "email": "kolev@ellco.pro",
       "passwordHash": "$2b$10$PQL/CeyRyIsqfUY2HHkyM.yCg04vKsZ7VGGjTYAfeAS0hDa79W6C."
+    },
+    {
+      "email": "srdjan@juristbiro.com",
+      "passwordHash": "$2b$10$Md6G/0LOI3fuv/pRcadopeOB7W61Q/9TJ1lPwDAr/GnsVIjpFWGua"
     }
   ]
 }
