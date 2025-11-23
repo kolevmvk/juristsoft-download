@@ -9,7 +9,7 @@ export default function handler(req, res) {
 
   const auth = req.headers.authorization || '';
   const [, token] = auth.split(' ');
-  const secret = process.env.JWT_SECRET || 'dev-secret-change-me';
+  const secret = process.env.JWT_SECRET || 'dev-secret';
   try { jwt.verify(token, secret); } catch { return res.status(401).send('Unauthorized'); }
 
   const { app, version } = req.query;
