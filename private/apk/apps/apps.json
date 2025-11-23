@@ -16,6 +16,16 @@
           "date": "2025-11-23"
         }
       ]
+    },
+    {
+      "id": "jurist_qr_app",
+      "name": "JuristSoft QR Terminal",
+      "description": "Aplikacija za generisanje QR sesija.",
+      "versions": [
+        { "version": "1.0.1-arm64",  "file": "1.0.1-arm64.apk",  "date": "2025-11-23" },
+        { "version": "1.0.1-armeabi","file": "1.0.1-armeabi.apk","date": "2025-11-23" },
+        { "version": "1.0.1-x86_64", "file": "1.0.1-x86_64.apk", "date": "2025-11-23" }
+      ]
     }
   ]
 }
