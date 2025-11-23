@@ -11,6 +11,10 @@
     {
       "email": "srdjan@juristbiro.com",
       "passwordHash": "$2b$10$Md6G/0LOI3fuv/pRcadopeOB7W61Q/9TJ1lPwDAr/GnsVIjpFWGua"
+    },
+    {
+      "email": "filipovic@juristbiro.com",
+      "passwordHash": "$2b$10$SLWurxnhh1W1AChlyJpu6uWCmWP.QE2.U93TZB1cKT1tseFtU7mrm"
     }
   ]
 }
