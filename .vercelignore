@@ -1,11 +1,10 @@
 # Exclude large APK files from Vercel build to avoid 250MB limit
 # Total APK size: ~516 MB (prelazi 250MB limit)
 
-# Public APK files
-public/apk/**/*.apk
-public/apk/**/*.APK
+# IMPORTANT: Keep public/apk/** for static serving via Vercel CDN
+# DO NOT ignore public/apk/** - these files are served statically
 
-# Private APK files
+# Private APK files (exclude from build - served via API endpoints)
 private/apk/**/*.apk
 private/apk/**/*.APK
 private/apk/apps/**/*.apk
@@ -13,9 +12,9 @@ private/apk/apps/**/*.APK
 private/apk/apps/jurist_qr_app/**/*.apk
 private/apk/apps/worker_app/**/*.apk
 
-# All APK files
-*.apk
-*.APK
+# Other APK files (but NOT in public/apk/ - public/apk/** is explicitly allowed)
+# Note: *.apk would ignore ALL .apk files including public/, so we only ignore private/
+# If you add APK files elsewhere, add specific ignore rules here
 
 # Other large files
 *.zip
