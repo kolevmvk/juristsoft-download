@@ -1,0 +1,6 @@
+# Exclude large APK files from Vercel build to avoid 250MB limit
+public/apk/**/*.apk
+private/apk/**/*.apk
+*.apk
+*.zip
+*.tar.gz
