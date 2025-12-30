@@ -10,16 +10,15 @@ const nextConfig = {
       '/api/apk': [], // Don't include APK files in bundle
     },
     outputFileTracingExcludes: {
-      // Exclude APK files from ALL routes
+      // Exclude APK files from serverless function bundle
+      // IMPORTANT: Do NOT exclude public/apk/** - these are served statically
       '*': [
-        './public/apk/**/*.apk',
         './private/apk/**/*.apk',
+        './private/apk/**/*.APK',
         './private/apk/apps/**/*.apk',
+        './private/apk/apps/**/*.APK',
         './private/apk/apps/jurist_qr_app/**/*.apk',
         './private/apk/apps/worker_app/**/*.apk',
-        './public/apk/apps/**/*.apk',
-        '**/*.apk',
-        '**/*.APK',
       ],
     },
     turbopack: {},
@@ -29,13 +28,13 @@ const nextConfig = {
     maxInactiveAge: 25 * 1000,
     pagesBufferLength: 2,
   },
-  // Exclude APK directories from static file serving
+  // Exclude APK directories from server bundle (but allow static serving from public/)
   webpack: (config, { isServer }) => {
     if (isServer) {
-      // Exclude APK files from server bundle
+      // Exclude private APK files from server bundle
+      // public/apk/** is served statically, so don't externalize it
       config.externals = config.externals || [];
       config.externals.push({
-        './public/apk': 'commonjs ./public/apk',
         './private/apk': 'commonjs ./private/apk',
       });
     }
