@@ -19,11 +19,19 @@ export default function handler(req, res) {
     return res.status(400).send('Missing app or file parameter');
   }
 
-  // Construct file path in public folder
-  const filePath = path.join(process.cwd(), 'public', 'apk', 'apps', app, file);
+  // Construct file path - check both public and private folders
+  // Priority: private first (to avoid public/ being included in build)
+  let filePath = path.join(process.cwd(), 'private', 'apk', 'apps', app, file);
+  
+  // Fallback to public if not found in private
+  if (!fs.existsSync(filePath)) {
+    filePath = path.join(process.cwd(), 'public', 'apk', 'apps', app, file);
+  }
 
   // Security: prevent path traversal
-  if (!filePath.startsWith(path.join(process.cwd(), 'public', 'apk'))) {
+  const privatePath = path.join(process.cwd(), 'private', 'apk');
+  const publicPath = path.join(process.cwd(), 'public', 'apk');
+  if (!filePath.startsWith(privatePath) && !filePath.startsWith(publicPath)) {
     return res.status(403).send('Forbidden');
   }
 
