@@ -1,6 +1,23 @@
 # Exclude large APK files from Vercel build to avoid 250MB limit
+# Total APK size: ~516 MB (prelazi 250MB limit)
+
+# Public APK files
 public/apk/**/*.apk
+public/apk/**/*.APK
+
+# Private APK files
 private/apk/**/*.apk
+private/apk/**/*.APK
+private/apk/apps/**/*.apk
+private/apk/apps/**/*.APK
+private/apk/apps/jurist_qr_app/**/*.apk
+private/apk/apps/worker_app/**/*.apk
+
+# All APK files
 *.apk
+*.APK
+
+# Other large files
 *.zip
 *.tar.gz
+*.tar
