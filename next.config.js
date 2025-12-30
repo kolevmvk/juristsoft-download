@@ -22,6 +22,7 @@ const nextConfig = {
         '**/*.APK',
       ],
     },
+    turbopack: {},
   },
   // Disable static optimization for large files
   onDemandEntries: {
