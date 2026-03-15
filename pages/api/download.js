@@ -15,7 +15,7 @@ export default function handler(req, res) {
   const { app, file } = req.query;
   if (!app || !file) return res.status(400).send('Missing app or file');
 
-  // Security: only allow alphanumeric, dash, dot in app and file
+  // Security: alphanumeric, dash, underscore, dot
   if (!/^[a-zA-Z0-9_-]+$/.test(app) || !/^[a-zA-Z0-9_.-]+$/.test(file)) {
     return res.status(400).send('Invalid app or file');
   }

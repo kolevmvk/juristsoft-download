@@ -9,16 +9,7 @@ const nextConfig = {
       '/api/public-apk': [],
     },
     outputFileTracingExcludes: {
-      // Exclude APK files from serverless function bundle
-      // IMPORTANT: Do NOT exclude public/apk/** - these are served statically
-      '*': [
-        './private/apk/**/*.apk',
-        './private/apk/**/*.APK',
-        './private/apk/apps/**/*.apk',
-        './private/apk/apps/**/*.APK',
-        './private/apk/apps/jurist_qr_app/**/*.apk',
-        './private/apk/apps/worker_app/**/*.apk',
-      ],
+      '*': ['./private/apk/**/*.apk', './private/apk/**/*.APK'],
     },
     turbopack: {},
   },
