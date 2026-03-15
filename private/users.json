@@ -15,6 +15,10 @@
     {
       "email": "filipovic@juristbiro.com",
       "passwordHash": "$2b$10$SLWurxnhh1W1AChlyJpu6uWCmWP.QE2.U93TZB1cKT1tseFtU7mrm"
+    },
+    {
+      "email": "test@juristsoft.com",
+      "passwordHash": "$2b$10$XG6Y7bUWmzy8obkZA4eJD.yRgG3.gdg/E5FV1MoKkOJbVwfKpKmr6"
     }
   ]
 }

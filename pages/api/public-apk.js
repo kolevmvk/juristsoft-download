@@ -14,38 +14,30 @@ export default function handler(req, res) {
   }
 
   const { app, file } = req.query;
-  
   if (!app || !file) {
     return res.status(400).send('Missing app or file parameter');
   }
 
-  // Construct file path - check both public and private folders
-  // Priority: private first (to avoid public/ being included in build)
-  let filePath = path.join(process.cwd(), 'private', 'apk', 'apps', app, file);
-  
-  // Fallback to public if not found in private
-  if (!fs.existsSync(filePath)) {
-    filePath = path.join(process.cwd(), 'public', 'apk', 'apps', app, file);
+  // Security: only allow safe characters
+  if (!/^[a-zA-Z0-9_-]+$/.test(app) || !/^[a-zA-Z0-9_.-]+$/.test(file)) {
+    return res.status(400).send('Invalid app or file');
   }
 
-  // Security: prevent path traversal
-  const privatePath = path.join(process.cwd(), 'private', 'apk');
-  const publicPath = path.join(process.cwd(), 'public', 'apk');
-  if (!filePath.startsWith(privatePath) && !filePath.startsWith(publicPath)) {
+  const publicPath = path.join(process.cwd(), 'public', 'apk', 'apps');
+  const filePath = path.join(publicPath, app, file);
+
+  if (!filePath.startsWith(publicPath)) {
     return res.status(403).send('Forbidden');
   }
-
   if (!fs.existsSync(filePath)) {
     return res.status(404).send('File not found');
   }
 
   const stat = fs.statSync(filePath);
-
   res.setHeader('Content-Type', 'application/vnd.android.package-archive');
   res.setHeader('Content-Length', stat.size);
   res.setHeader('Content-Disposition', `attachment; filename="${file}"`);
   res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
 
-  const stream = fs.createReadStream(filePath);
-  stream.pipe(res);
+  fs.createReadStream(filePath).pipe(res);
 }

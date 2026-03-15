@@ -5,9 +5,8 @@ const nextConfig = {
   experimental: {
     outputFileTracingIncludes: {
       '/api/apps': ['./private/apk/apps/apps.json'],
-      '/api/download': [], // Don't include APK files in bundle
-      '/api/public-apk': [], // Don't include APK files in bundle
-      '/api/apk': [], // Don't include APK files in bundle
+      '/api/download': [],
+      '/api/public-apk': [],
     },
     outputFileTracingExcludes: {
       // Exclude APK files from serverless function bundle

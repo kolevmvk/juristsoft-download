@@ -2,30 +2,29 @@
   "apps": [
     {
       "id": "worker_app",
-      "name": "JuristSoft Worker App",
-      "description": "Aplikacija za radnike.",
+      "name": "JuristSoft Worker",
+      "description": "Aplikacija za radnike – evidencija radnog vremena, pauze, QR odjava.",
       "versions": [
-        {
-          "version": "1.0.0-test",
-          "file": "1.0.0-test.apk",
-          "date": "2025-11-23"
-        },
-        {
-          "version": "1.0.0",
-          "file": "1.0.0.apk",
-          "date": "2025-11-23"
-        }
+        { "version": "1.0.0", "file": "1.0.0.apk", "date": "2025-11-23" },
+        { "version": "1.1.0", "file": "1.1.0.apk", "date": "2025-12-30" },
+        { "version": "1.1.0-debug", "file": "worker_app-1.1.0-debug.apk", "date": "2025-12-30" }
       ]
     },
     {
-      "id": "jurist_qr_app",
+      "id": "juristsoft_qr",
       "name": "JuristSoft QR Terminal",
-      "description": "Aplikacija za generisanje QR sesija.",
+      "description": "Aplikacija za generisanje QR sesija i skeniranje.",
       "versions": [
-        { "version": "1.0.1-arm64",  "file": "1.0.1-arm64.apk",  "date": "2025-11-23" },
-        { "version": "1.0.1-armeabi","file": "1.0.1-armeabi.apk","date": "2025-11-23" },
+        { "version": "1.0.1-arm64", "file": "1.0.1-arm64.apk", "date": "2025-11-23" },
+        { "version": "1.0.1-armeabi", "file": "1.0.1-armeabi.apk", "date": "2025-11-23" },
         { "version": "1.0.1-x86_64", "file": "1.0.1-x86_64.apk", "date": "2025-11-23" }
       ]
+    },
+    {
+      "id": "juristsoft_scan",
+      "name": "JuristSoft Scan",
+      "description": "Aplikacija za skeniranje dokumentata i QR kodova.",
+      "versions": []
     }
   ]
 }

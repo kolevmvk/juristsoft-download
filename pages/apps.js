@@ -23,16 +23,16 @@ export default function Apps() {
     })();
   }, []);
 
-  async function download(appId, version) {
+  async function download(appId, file) {
     const t = localStorage.getItem('jwt');
-    const r = await fetch(`/api/download?app=${encodeURIComponent(appId)}&version=${encodeURIComponent(version)}`, {
+    const r = await fetch(`/api/download?app=${encodeURIComponent(appId)}&file=${encodeURIComponent(file)}`, {
       headers: { Authorization: `Bearer ${t}` }
     });
     if (!r.ok) { setErr(await r.text()); return; }
     const blob = await r.blob();
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url; a.download = `${appId}-${version}.apk`; a.click();
+    a.href = url; a.download = file; a.click();
     URL.revokeObjectURL(url);
   }
 
@@ -73,11 +73,14 @@ export default function Apps() {
                 <div style={{marginTop:12}}>
                   <div className="muted" style={{marginBottom:6}}>Verzije:</div>
                   <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>
-                    {app.versions.map(v => (
+                    {(!app.versions || app.versions.length === 0) && (
+                      <span className="muted">Nema dostupnih verzija</span>
+                    )}
+                    {app.versions?.map(v => (
                       <button
                         key={v.version}
                         className="btn-ok"
-                        onClick={() => download(app.id, v.version)}
+                        onClick={() => download(app.id, v.file)}
                         style={{flex:'0 0 auto'}}
                       >
                         Download {v.version}
