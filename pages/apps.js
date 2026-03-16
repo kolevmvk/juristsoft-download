@@ -5,6 +5,11 @@ export default function Apps() {
   const [apps, setApps] = useState([]);
   const [err, setErr] = useState('');
   const [busy, setBusy] = useState(false);
+  const [year, setYear] = useState(null);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
 
   useEffect(() => {
     const t = localStorage.getItem('jwt');
@@ -94,7 +99,7 @@ export default function Apps() {
 
         </div>
 
-        <div className="footer">© {new Date().getFullYear()} Jurist Biro · QA/TEST</div>
+        <div className="footer">© {year ?? ''} Jurist Biro · QA/TEST</div>
       </div>
       <div className="ribbon">JuristSoft · Releases</div>
     </div>

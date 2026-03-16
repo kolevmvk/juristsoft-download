@@ -22,6 +22,7 @@ export default function handler(req, res) {
   try {
     const data = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
     // očekujemo formu { "apps": [...] }
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
     return res.json(data);
   } catch (e) {
     console.error('apps.json parse error:', e);
