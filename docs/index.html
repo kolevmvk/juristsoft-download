@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JuristSoft — Preuzimanje aplikacija</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --card: #1a2030;
+      --border: rgba(255,255,255,0.12);
+      --text: #e8eaed;
+      --muted: rgba(255,255,255,0.55);
+      --primary: #4285f4;
+      --primary-h: #5a95f5;
+      --success: #34a853;
+      --warn-bg: rgba(249,171,0,0.12);
+      --warn-border: rgba(249,171,0,0.35);
+      --warn-text: #fdd663;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--card);
+    }
+    header img { width: 44px; height: 44px; border-radius: 10px; }
+    header h1 { font-size: 1.15rem; font-weight: 700; }
+    header p { font-size: 0.8rem; color: var(--muted); }
+    main { max-width: 680px; margin: 0 auto; padding: 24px 16px 60px; }
+    .note {
+      margin-bottom: 24px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      color: var(--warn-text);
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+    .note strong { font-weight: 700; }
+    h2 { font-size: 1.25rem; margin-bottom: 18px; }
+    .app-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      margin-bottom: 18px;
+    }
+    .app-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+    .app-card p { font-size: 0.875rem; color: var(--muted); margin-bottom: 18px; line-height: 1.55; }
+    .divider { border: none; border-top: 1px solid var(--border); margin-bottom: 16px; }
+    .version-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 9px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+    }
+    .version-row:last-child { margin-bottom: 0; }
+    .v-info { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .v-num { font-weight: 700; font-size: 0.95rem; }
+    .badge {
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .badge-latest { background: var(--success); color: #fff; }
+    .badge-abi { background: rgba(255,255,255,0.1); color: var(--muted); }
+    .v-date { font-size: 0.75rem; color: var(--muted); }
+    .btn-dl {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .btn-dl:hover { background: var(--primary-h); }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    @media (max-width: 480px) {
+      .version-row { flex-direction: column; align-items: stretch; }
+      .btn-dl { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://raw.githubusercontent.com/kolevmvk/juristsoft-download/main/public/JuristSoft-logo-darkgit.png" alt="JuristSoft" onerror="this.style.display='none'" />
+    <div>
+      <h1>JuristSoft Download</h1>
+      <p>Preuzimanje test APK-ova · Samo za internu upotrebu</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="note">
+      <strong>📲 Instalacija na Android:</strong> Kada se pojavi poruka <strong>„Nepoznati izvor"</strong> ili <strong>„Install unknown apps"</strong> — dozvoli instalaciju za tvoj browser ili File Manager. Ovo je normalno za APK-ove van Play Store-a.
+    </div>
+
+    <h2>Dostupne aplikacije</h2>
+
+    <!-- worker_app -->
+    <div class="app-card">
+      <h3>JuristSoft Radnik</h3>
+      <p>Mobilna aplikacija za radnike — evidencija radnog vremena, check-in/out, odsustva, statistike.</p>
+      <hr class="divider" />
+      <div class="version-row">
+        <div class="v-info">
+          <span class="v-num">v1.0.0</span>
+          <span class="badge badge-latest">Latest</span>
+          <span class="v-date">2026-04-09</span>
+        </div>
+        <a class="btn-dl" href="https://github.com/kolevmvk/juristsoft-download/releases/download/v1.0.0/worker-app-1.0.0.apk" download>
+          ⬇ Preuzmi APK
+        </a>
+      </div>
+    </div>
+
+    <!-- worker_foreman_app -->
+    <div class="app-card">
+      <h3>JuristSoft Poverenik</h3>
+      <p>Aplikacija za radnike sa poverenik panelom — tim, mapa, zadaci, aktivnosti, oprema.</p>
+      <hr class="divider" />
+      <div class="version-row">
+        <div class="v-info">
+          <span class="v-num">v1.0.0</span>
+          <span class="badge badge-latest">Latest</span>
+          <span class="v-date">2026-04-09</span>
+        </div>
+        <a class="btn-dl" href="https://github.com/kolevmvk/juristsoft-download/releases/download/v1.0.0/worker-foreman-app-1.0.0.apk" download>
+          ⬇ Preuzmi APK
+        </a>
+      </div>
+    </div>
+
+    <!-- juristsoft_qr -->
+    <div class="app-card">
+      <h3>JuristSoft QR Terminal</h3>
+      <p>QR terminal za evidenciju prisustva — Android tablet ili telefon. Za novije uređaje koristi <strong>arm64</strong>.</p>
+      <hr class="divider" />
+      <div class="version-row">
+        <div class="v-info">
+          <span class="v-num">v1.0.1</span>
+          <span class="badge badge-latest">Latest</span>
+          <span class="badge badge-abi">arm64-v8a</span>
+          <span class="v-date">2026-04-09</span>
+        </div>
+        <a class="btn-dl" href="https://github.com/kolevmvk/juristsoft-download/releases/download/v1.0.0/juristsoft-qr-1.0.1-arm64.apk" download>
+          ⬇ Preuzmi APK
+        </a>
+      </div>
+      <div class="version-row">
+        <div class="v-info">
+          <span class="v-num">v1.0.1</span>
+          <span class="badge badge-abi">armeabi-v7a</span>
+          <span class="v-date">2026-04-09</span>
+        </div>
+        <a class="btn-dl" href="https://github.com/kolevmvk/juristsoft-download/releases/download/v1.0.0/juristsoft-qr-1.0.1-armeabi.apk" download>
+          ⬇ Preuzmi APK
+        </a>
+      </div>
+      <div class="version-row">
+        <div class="v-info">
+          <span class="v-num">v1.0.1</span>
+          <span class="badge badge-abi">x86_64</span>
+          <span class="v-date">2026-04-09</span>
+        </div>
+        <a class="btn-dl" href="https://github.com/kolevmvk/juristsoft-download/releases/download/v1.0.0/juristsoft-qr-1.0.1-x86_64.apk" download>
+          ⬇ Preuzmi APK
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer>© 2026 Jurist Biro · JuristSoft · Interno testiranje</footer>
+</body>
+</html>
