@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="revision" content="2026-04-11T18:20Z" />
   <title>JuristSoft — Preuzimanje aplikacija</title>
   <style>
     :root {
@@ -87,6 +88,17 @@
     .badge-latest { background: var(--success); color: #fff; }
     .badge-abi { background: rgba(255,255,255,0.1); color: var(--muted); }
     .v-date { font-size: 0.75rem; color: var(--muted); }
+    .publish-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 0 0 20px;
+      padding: 12px 14px;
+      border-left: 3px solid var(--primary);
+      background: rgba(66, 133, 244, 0.1);
+      border-radius: 0 10px 10px 0;
+      line-height: 1.55;
+    }
+    .publish-meta strong { color: var(--text); }
     .btn-dl {
       display: inline-block;
       padding: 10px 20px;
@@ -123,6 +135,12 @@
   </header>
 
   <main>
+    <p class="publish-meta">
+      <strong>Poslednje ažuriranje stranice:</strong> 2026-04-11 18:20 UTC ·
+      <strong>Radnik</strong> APK verzija <strong>1.0.2</strong> (fajl <code>worker-app-1.0.2.apk</code>, GitHub tag <code>v1.0.2</code>) ·
+      <strong>Poverenik</strong> i dalje <strong>1.0.1</strong> u nazivu paketa, ali <strong>novi build</strong> sa istog taga (<code>worker-foreman-app-1.0.1.apk</code>).
+      Ako ti telefon nudi „staru“ instalaciju, obriši aplikaciju pa ponovo preuzmi ili isprazni keš preuzimanja u browseru.
+    </p>
     <div class="note">
       <strong>📲 Instalacija na Android:</strong> Kada se pojavi poruka <strong>„Nepoznati izvor"</strong> ili <strong>„Install unknown apps"</strong> — dozvoli instalaciju za tvoj browser ili File Manager. Ovo je normalno za APK-ove van Play Store-a.
     </div>
@@ -138,9 +156,9 @@
         <div class="v-info">
           <span class="v-num">v1.0.2</span>
           <span class="badge badge-latest">Latest</span>
-          <span class="v-date">2026-04-11</span>
+          <span class="v-date">objava 2026-04-11</span>
         </div>
-        <a class="btn-dl" href="https://github.com/kolevmvk/juristsoft-download/releases/download/v1.0.2/worker-app-1.0.2.apk" download>
+        <a class="btn-dl" href="https://github.com/kolevmvk/juristsoft-download/releases/download/v1.0.2/worker-app-1.0.2.apk?cb=202604111820" download>
           ⬇ Preuzmi APK
         </a>
       </div>
@@ -149,15 +167,15 @@
     <!-- worker_foreman_app -->
     <div class="app-card">
       <h3>JuristSoft Poverenik</h3>
-      <p>Aplikacija za radnike sa poverenik panelom — tim, mapa, zadaci, aktivnosti, oprema.</p>
+      <p>Aplikacija za radnike sa poverenik panelom — tim, mapa, zadaci, aktivnosti, oprema. <em>APK je novi build (2026-04-11); broj verzije u sistemu ostaje 1.0.1.</em></p>
       <hr class="divider" />
       <div class="version-row">
         <div class="v-info">
           <span class="v-num">v1.0.1</span>
           <span class="badge badge-latest">Latest</span>
-          <span class="v-date">2026-04-11</span>
+          <span class="v-date">build 2026-04-11</span>
         </div>
-        <a class="btn-dl" href="https://github.com/kolevmvk/juristsoft-download/releases/download/v1.0.2/worker-foreman-app-1.0.1.apk" download>
+        <a class="btn-dl" href="https://github.com/kolevmvk/juristsoft-download/releases/download/v1.0.2/worker-foreman-app-1.0.1.apk?cb=202604111820" download>
           ⬇ Preuzmi APK
         </a>
       </div>
@@ -173,7 +191,7 @@
           <span class="v-num">v1.0.1</span>
           <span class="badge badge-latest">Latest</span>
           <span class="badge badge-abi">arm64-v8a</span>
-          <span class="v-date">2026-04-11</span>
+          <span class="v-date">2026-04-09</span>
         </div>
         <a class="btn-dl" href="https://github.com/kolevmvk/juristsoft-download/releases/download/v1.0.0/juristsoft-qr-1.0.1-arm64.apk" download>
           ⬇ Preuzmi APK
@@ -183,7 +201,7 @@
         <div class="v-info">
           <span class="v-num">v1.0.1</span>
           <span class="badge badge-abi">armeabi-v7a</span>
-          <span class="v-date">2026-04-11</span>
+          <span class="v-date">2026-04-09</span>
         </div>
         <a class="btn-dl" href="https://github.com/kolevmvk/juristsoft-download/releases/download/v1.0.0/juristsoft-qr-1.0.1-armeabi.apk" download>
           ⬇ Preuzmi APK
@@ -193,7 +211,7 @@
         <div class="v-info">
           <span class="v-num">v1.0.1</span>
           <span class="badge badge-abi">x86_64</span>
-          <span class="v-date">2026-04-11</span>
+          <span class="v-date">2026-04-09</span>
         </div>
         <a class="btn-dl" href="https://github.com/kolevmvk/juristsoft-download/releases/download/v1.0.0/juristsoft-qr-1.0.1-x86_64.apk" download>
           ⬇ Preuzmi APK
