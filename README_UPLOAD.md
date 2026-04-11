@@ -2,6 +2,8 @@
 
 Umesto direktnog commit-a velikog APK fajla (preko 100MB), koristimo **GitHub Releases**.
 
+**GitHub Pages (`https://kolevmvk.github.io/juristsoft-download/`):** sajt se servira sa grane **`gh-pages`** (korenski `index.html`, plus `docs/index.html` u sync). Samo izmena `main/docs/index.html` **ne ažurira** živi sajt dok se isti sadržaj ne iskopira na `gh-pages` i push-uje (npr. `git show main:docs/index.html > index.html` na `gh-pages`).
+
 ---
 
 ## 🚀 Brzo uputstvo
