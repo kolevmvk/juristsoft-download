@@ -1,107 +1,71 @@
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import fs from 'fs';
+import path from 'path';
 
-export default function Apps() {
-  const [apps, setApps] = useState([]);
-  const [err, setErr] = useState('');
-  const [busy, setBusy] = useState(false);
-  const [year, setYear] = useState(null);
+export async function getServerSideProps() {
+  const manifestPath = path.join(process.cwd(), 'private', 'apk', 'apps', 'apps.json');
+  let apps = [];
+  try {
+    const raw = fs.readFileSync(manifestPath, 'utf8');
+    apps = JSON.parse(raw).apps || [];
+  } catch {}
+  return { props: { apps, year: new Date().getFullYear() } };
+}
 
-  useEffect(() => {
-    setYear(new Date().getFullYear());
-  }, []);
-
-  useEffect(() => {
-    const t = localStorage.getItem('jwt');
-    if (!t) { window.location.href = '/'; return; }
-
-    (async () => {
-      try {
-        setBusy(true);
-        const r = await fetch('/api/apps', { headers: { Authorization: `Bearer ${t}` } });
-        if (!r.ok) { setErr(await r.text()); return; }
-        const data = await r.json();
-        setApps(data.apps || []);
-      } catch {
-        setErr('Greška pri čitanju aplikacija');
-      } finally { setBusy(false); }
-    })();
-  }, []);
-
-  async function download(appId, file) {
-    const t = localStorage.getItem('jwt');
-    const r = await fetch(`/api/download?app=${encodeURIComponent(appId)}&file=${encodeURIComponent(file)}`, {
-      headers: { Authorization: `Bearer ${t}` }
-    });
-    if (!r.ok) { setErr(await r.text()); return; }
-    const blob = await r.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = file; a.click();
-    URL.revokeObjectURL(url);
-  }
-
+export default function Apps({ apps, year }) {
   return (
-    <div className="wrap">
-      <div className="shell" style={{maxWidth: 900}}>
-        <div className="brand">
+    <div className="portal">
+      <header className="portal-header">
+        <div className="portal-brand">
           <img src="/JuristSoft-logo-darkgit.png" alt="JuristSoft" />
-          <h1>JuristSoft — Test APK repozitorijum</h1>
+          <div>
+            <h1>JuristSoft Download Portal</h1>
+            <p className="portal-subtitle">Test APK-ovi za testere</p>
+          </div>
         </div>
+      </header>
 
-        <div className="badges">
-          <span className="badge warn">TEST okruženje</span>
-          <span className="badge">Interna upotreba</span>
-          <Link className="badge" href="/">← Odjava / Login</Link>
-        </div>
-
-        <div className="card">
-          <h2>Dostupne aplikacije</h2>
-          <p className="muted">Ovde preuzimaš konkretne verzije APK-a. Dodavanje verzija radiš lokalno kroz repo (folder + manifest).</p>
-
-          {busy && <div className="note">Učitavam…</div>}
-          {err && <div className="alert">{err}</div>}
-
-          {!busy && apps.length === 0 && <div className="note">Nema definisanih aplikacija.</div>}
-
-          <div style={{display:'grid', gap:16}}>
-            {apps.map(app => (
-              <div key={app.id} style={{padding:16, border:'1px solid var(--border)', borderRadius:12}}>
-                <div style={{display:'flex', justifyContent:'space-between', alignItems:'baseline', gap:12, flexWrap:'wrap'}}>
-                  <div>
-                    <div style={{fontSize:18, fontWeight:700}}>{app.name}</div>
-                    <div className="muted">{app.description}</div>
-                  </div>
-                  <div className="badge">ID: {app.id}</div>
-                </div>
-
-                <div style={{marginTop:12}}>
-                  <div className="muted" style={{marginBottom:6}}>Verzije:</div>
-                  <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>
-                    {(!app.versions || app.versions.length === 0) && (
-                      <span className="muted">Nema dostupnih verzija</span>
-                    )}
-                    {app.versions?.map(v => (
-                      <button
-                        key={v.version}
-                        className="btn-ok"
-                        onClick={() => download(app.id, v.file)}
-                        style={{flex:'0 0 auto'}}
-                      >
-                        Download {v.version}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
+      <main className="portal-main">
+        <div className="portal-content">
+          <div className="install-note">
+            <strong>Instalacija na Android:</strong> Ako se pojavi poruka &ldquo;Nepoznati izvor&rdquo; ili &ldquo;Install unknown apps&rdquo;, dozvoli instalaciju za browser ili File Manager.
           </div>
 
-        </div>
+          <div className="portal-intro">
+            <h2>Dostupne aplikacije</h2>
+          </div>
 
-        <div className="footer">© {year ?? ''} Jurist Biro · QA/TEST</div>
-      </div>
-      <div className="ribbon">JuristSoft · Releases</div>
+          <div className="app-grid">
+            {apps.map((app) => (
+              <article key={app.id} className="app-card">
+                <div className="app-card-header">
+                  <h3>{app.name}</h3>
+                  <p className="app-desc">{app.description}</p>
+                </div>
+
+                <div className="app-versions">
+                  {app.versions.map((v, i) => (
+                    <div key={i} className="version-item">
+                      <div className="version-info">
+                        <span className="version-num">v{v.version}</span>
+                        {v.latest && <span className="version-latest">Latest</span>}
+                        {v.abi && <span className="version-abi">{v.abi}</span>}
+                        {v.date && <span className="version-date">{v.date}</span>}
+                      </div>
+                      <a className="btn-download" href={v.downloadUrl} download>
+                        Preuzmi APK
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </main>
+
+      <footer className="portal-footer">
+        © {year} Jurist Biro · JuristSoft
+      </footer>
     </div>
   );
 }
