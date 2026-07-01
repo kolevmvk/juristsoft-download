@@ -1,28 +1,5 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
-  "framework": "nextjs",
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./",
-  "functions": {
-    "pages/api/**/*.js": {
-      "maxDuration": 30
-    }
-  },
-  "headers": [
-    {
-      "source": "/api/public-apk",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/apk/apps/:app/:file",
-      "destination": "/api/public-apk?app=:app&file=:file"
-    }
-  ]
+  "framework": "nextjs"
 }

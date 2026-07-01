@@ -1,37 +1,16 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import fs from 'fs';
+import path from 'path';
 
-export default function Apps() {
-  const router = useRouter();
-  const [apps, setApps] = useState([]);
-  const [err, setErr] = useState('');
-  const [busy, setBusy] = useState(false);
+export async function getServerSideProps() {
+  const manifestPath = path.join(process.cwd(), 'private', 'apk', 'apps', 'apps.json');
+  let apps = [];
+  try {
+    apps = JSON.parse(fs.readFileSync(manifestPath, 'utf8')).apps || [];
+  } catch {}
+  return { props: { apps, year: new Date().getFullYear() } };
+}
 
-  useEffect(() => {
-    const t = localStorage.getItem('jwt');
-    if (!t) { router.replace('/'); return; }
-
-    (async () => {
-      try {
-        setBusy(true);
-        const r = await fetch('/api/apps', { headers: { Authorization: `Bearer ${t}` } });
-        if (r.status === 401) { localStorage.removeItem('jwt'); router.replace('/'); return; }
-        if (!r.ok) { setErr('Greška pri učitavanju aplikacija.'); return; }
-        const data = await r.json();
-        setApps(data.apps || []);
-      } catch {
-        setErr('Greška u mreži.');
-      } finally {
-        setBusy(false);
-      }
-    })();
-  }, [router]);
-
-  function logout() {
-    localStorage.removeItem('jwt');
-    router.replace('/');
-  }
-
+export default function Apps({ apps, year }) {
   return (
     <div className="portal">
       <header className="portal-header">
@@ -42,20 +21,13 @@ export default function Apps() {
             <p className="portal-subtitle">Test APK-ovi · Samo za internu upotrebu</p>
           </div>
         </div>
-        <button className="btn-logout" onClick={logout}>Odjava</button>
       </header>
-
       <main className="portal-main">
         <div className="portal-content">
           <div className="install-note">
-            <strong>Instalacija na Android:</strong> Ako se pojavi poruka &ldquo;Nepoznati izvor&rdquo; ili &ldquo;Install unknown apps&rdquo;, dozvoli instalaciju za browser ili File Manager.
+            <strong>Instalacija na Android:</strong> Ako se pojavi poruka &ldquo;Nepoznati izvor&rdquo;, dozvoli instalaciju za browser ili File Manager.
           </div>
-
-          {busy && <p style={{color:'var(--muted)'}}>Učitavam...</p>}
-          {err && <p style={{color:'#ff6b6b'}}>{err}</p>}
-
           <div className="portal-intro"><h2>Dostupne aplikacije</h2></div>
-
           <div className="app-grid">
             {apps.map((app) => (
               <article key={app.id} className="app-card">
@@ -74,8 +46,7 @@ export default function Apps() {
                       </div>
                       {v.downloadUrl
                         ? <a className="btn-download" href={v.downloadUrl} download>Preuzmi APK</a>
-                        : <span className="version-abi">Nedostupno</span>
-                      }
+                        : <span className="version-abi">—</span>}
                     </div>
                   ))}
                 </div>
@@ -84,10 +55,7 @@ export default function Apps() {
           </div>
         </div>
       </main>
-
-      <footer className="portal-footer">
-        © {new Date().getFullYear()} Jurist Biro · JuristSoft
-      </footer>
+      <footer className="portal-footer">© {year} Jurist Biro · JuristSoft</footer>
     </div>
   );
 }
